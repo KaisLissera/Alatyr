@@ -307,6 +307,41 @@
         )
       )
     )
+    (symbol "Connector:TestPoint" (pin_numbers hide) (pin_names (offset 0.762) hide) (in_bom yes) (on_board yes)
+      (property "Reference" "TP" (at 0 6.858 0)
+        (effects (font (size 1.27 1.27)))
+      )
+      (property "Value" "TestPoint" (at 0 5.08 0)
+        (effects (font (size 1.27 1.27)))
+      )
+      (property "Footprint" "" (at 5.08 0 0)
+        (effects (font (size 1.27 1.27)) hide)
+      )
+      (property "Datasheet" "~" (at 5.08 0 0)
+        (effects (font (size 1.27 1.27)) hide)
+      )
+      (property "ki_keywords" "test point tp" (at 0 0 0)
+        (effects (font (size 1.27 1.27)) hide)
+      )
+      (property "ki_description" "test point" (at 0 0 0)
+        (effects (font (size 1.27 1.27)) hide)
+      )
+      (property "ki_fp_filters" "Pin* Test*" (at 0 0 0)
+        (effects (font (size 1.27 1.27)) hide)
+      )
+      (symbol "TestPoint_0_1"
+        (circle (center 0 3.302) (radius 0.762)
+          (stroke (width 0) (type default))
+          (fill (type none))
+        )
+      )
+      (symbol "TestPoint_1_1"
+        (pin passive line (at 0 0 90) (length 2.54)
+          (name "1" (effects (font (size 1.27 1.27))))
+          (number "1" (effects (font (size 1.27 1.27))))
+        )
+      )
+    )
     (symbol "Connector:USB_C_Receptacle_USB2.0" (pin_names (offset 1.016)) (in_bom yes) (on_board yes)
       (property "Reference" "J" (at -10.16 19.05 0)
         (effects (font (size 1.27 1.27)) (justify left))
@@ -2158,6 +2193,9 @@
   (junction (at 63.5 190.5) (diameter 0) (color 0 0 0 0)
     (uuid 0bc4ae04-dfba-4260-9b91-280283b1139b)
   )
+  (junction (at 342.9 93.98) (diameter 0) (color 0 0 0 0)
+    (uuid 124552d8-0015-4c09-95e5-e6dfb073fcfe)
+  )
   (junction (at 231.14 43.18) (diameter 0) (color 0 0 0 0)
     (uuid 16b46274-ca43-42c0-8014-1430097325bd)
   )
@@ -2206,6 +2244,9 @@
   (junction (at 267.97 63.5) (diameter 0) (color 0 0 0 0)
     (uuid 8acc2062-fcfa-4aa8-bc35-ae361ae0826c)
   )
+  (junction (at 224.79 189.23) (diameter 0) (color 0 0 0 0)
+    (uuid 8e51701f-cb09-45b1-804c-ff0126285a30)
+  )
   (junction (at 190.5 189.23) (diameter 0) (color 0 0 0 0)
     (uuid 9174d6b4-e7d8-4704-9db1-bcb458485e0e)
   )
@@ -2238,6 +2279,9 @@
   )
   (junction (at 220.98 53.34) (diameter 0) (color 0 0 0 0)
     (uuid bee6268b-38d2-4ec4-aff2-340f68f1922d)
+  )
+  (junction (at 364.49 189.23) (diameter 0) (color 0 0 0 0)
+    (uuid c123318c-b715-4583-9916-6f3a66f38a35)
   )
   (junction (at 312.42 189.23) (diameter 0) (color 0 0 0 0)
     (uuid c18439dc-b3e2-4ab7-a1fc-186b1d9170ce)
@@ -2295,7 +2339,6 @@
   (no_connect (at 252.73 133.35) (uuid 6362881c-c8f3-44cd-b01f-30183d7fd124))
   (no_connect (at 252.73 135.89) (uuid 68a9bc18-57d1-4bbb-bbc5-74b3969813a8))
   (no_connect (at 102.87 114.3) (uuid 864cd6b7-48e3-4bb3-a605-31976bb04b5a))
-  (no_connect (at 252.73 90.17) (uuid 88d3b718-c2f1-439c-adfa-bd86b0981bb6))
   (no_connect (at 102.87 116.84) (uuid 8fc452ca-d8ca-4c24-bb6d-ed841302bcc6))
   (no_connect (at 138.43 104.14) (uuid 94fa55c7-5a48-43e7-bfed-7fae78a434bb))
   (no_connect (at 138.43 109.22) (uuid b2355c41-ec92-4569-aea8-b2c8ba31a642))
@@ -2307,6 +2350,7 @@
   (no_connect (at 133.35 63.5) (uuid c6c67c38-20a5-415e-a372-6fae9ca4817e))
   (no_connect (at 102.87 101.6) (uuid c8e2cdd2-41b2-4cd1-8d3c-d98aef55895b))
   (no_connect (at 102.87 106.68) (uuid cf51ad29-4d68-4beb-b3bc-fa01eb55b239))
+  (no_connect (at 252.73 97.79) (uuid d03ee82e-79dd-4fcb-b6ec-98a0963b36a0))
   (no_connect (at 252.73 130.81) (uuid e0622eaf-09ca-4aea-aa6d-74cc452f5753))
   (no_connect (at 138.43 101.6) (uuid e459631b-5bcb-459c-95a9-6ba523e499ed))
   (no_connect (at 285.75 107.95) (uuid eae5a71a-8463-4903-b02e-42fef0157522))
@@ -2443,7 +2487,7 @@
     (stroke (width 0) (type default))
     (uuid 210b87d2-b82b-472d-a05c-d3b153d35853)
   )
-  (wire (pts (xy 350.52 116.84) (xy 350.52 118.11))
+  (wire (pts (xy 350.52 106.68) (xy 350.52 118.11))
     (stroke (width 0) (type default))
     (uuid 22bea240-faee-4b81-baa6-08f67b92a9e1)
   )
@@ -2591,7 +2635,7 @@
     (stroke (width 0) (type default))
     (uuid 43b31a43-c5af-4163-9300-c065b6ce1411)
   )
-  (wire (pts (xy 336.55 93.98) (xy 345.44 93.98))
+  (wire (pts (xy 336.55 93.98) (xy 342.9 93.98))
     (stroke (width 0) (type default))
     (uuid 4473d610-9d4f-4a11-a30a-212554bb219a)
   )
@@ -2602,10 +2646,6 @@
   (wire (pts (xy 381 228.6) (xy 381 229.87))
     (stroke (width 0) (type default))
     (uuid 45239122-01da-4865-a203-d5be40589e77)
-  )
-  (wire (pts (xy 373.38 93.98) (xy 383.54 93.98))
-    (stroke (width 0) (type default))
-    (uuid 45338314-b6e3-48d3-99ad-cce1157bff0d)
   )
   (wire (pts (xy 231.14 52.07) (xy 231.14 53.34))
     (stroke (width 0) (type default))
@@ -2663,7 +2703,7 @@
     (stroke (width 0) (type default))
     (uuid 54da684d-92eb-48d9-8212-3798df820682)
   )
-  (wire (pts (xy 386.08 135.89) (xy 386.08 134.62))
+  (wire (pts (xy 386.08 135.89) (xy 386.08 123.19))
     (stroke (width 0) (type default))
     (uuid 5514ea92-fe32-4682-8ba0-49e127413dc6)
   )
@@ -2711,6 +2751,10 @@
     (stroke (width 0) (type default))
     (uuid 63f62b57-b4df-4b4f-829e-8e10646d45e8)
   )
+  (wire (pts (xy 364.49 189.23) (xy 367.03 189.23))
+    (stroke (width 0) (type default))
+    (uuid 65ca18c1-d1c1-4101-bc19-d7346f246739)
+  )
   (wire (pts (xy 341.63 213.36) (xy 353.06 213.36))
     (stroke (width 0) (type default))
     (uuid 65e6df5f-cd02-4b02-b5c1-f2a65de9c895)
@@ -2751,7 +2795,7 @@
     (stroke (width 0) (type default))
     (uuid 6f6d9c0e-a015-413f-ae87-6c3be482f237)
   )
-  (wire (pts (xy 220.98 189.23) (xy 232.41 189.23))
+  (wire (pts (xy 220.98 189.23) (xy 224.79 189.23))
     (stroke (width 0) (type default))
     (uuid 6feaeb8f-dcda-4502-9f19-8b4449321afe)
   )
@@ -2819,6 +2863,10 @@
     (stroke (width 0) (type default))
     (uuid 7dd5591c-a191-4542-9672-5c7b8e9a734a)
   )
+  (wire (pts (xy 224.79 189.23) (xy 232.41 189.23))
+    (stroke (width 0) (type default))
+    (uuid 7decaf9a-fee2-4ef7-9771-dc2d30d8779c)
+  )
   (wire (pts (xy 350.52 161.29) (xy 350.52 162.56))
     (stroke (width 0) (type default))
     (uuid 7e45d7bf-837c-4751-958a-c75586cace41)
@@ -2835,6 +2883,10 @@
     (stroke (width 0) (type default))
     (uuid 802ee728-9c88-46eb-aeda-5b687b2ad095)
   )
+  (wire (pts (xy 342.9 93.98) (xy 345.44 93.98))
+    (stroke (width 0) (type default))
+    (uuid 804caf2e-af3a-4a0c-beb9-d59378448d62)
+  )
   (wire (pts (xy 238.76 107.95) (xy 252.73 107.95))
     (stroke (width 0) (type default))
     (uuid 80f3bd20-26cd-402c-acee-b7f5907f6f3d)
@@ -2847,10 +2899,6 @@
     (stroke (width 0) (type default))
     (uuid 82dadc71-b11d-4b5e-95d4-ba15e97239dd)
   )
-  (wire (pts (xy 238.76 97.79) (xy 252.73 97.79))
-    (stroke (width 0) (type default))
-    (uuid 84605f62-3216-4aea-9c21-185e2e22ab7d)
-  )
   (wire (pts (xy 266.7 44.45) (xy 278.13 44.45))
     (stroke (width 0) (type default))
     (uuid 84ade572-2fbd-4d3c-939b-165e9572823e)
@@ -2858,6 +2906,10 @@
   (wire (pts (xy 101.6 137.16) (xy 102.87 137.16))
     (stroke (width 0) (type default))
     (uuid 85168252-d66e-4e01-b129-8333e40f51fa)
+  )
+  (wire (pts (xy 242.57 90.17) (xy 252.73 90.17))
+    (stroke (width 0) (type default))
+    (uuid 857116a2-f51a-45f9-8855-fabed25e3689)
   )
   (wire (pts (xy 52.07 203.2) (xy 52.07 205.74))
     (stroke (width 0) (type default))
@@ -3023,7 +3075,7 @@
     (stroke (width 0) (type default))
     (uuid b654d1cf-e673-48f3-b710-1b78d92bfe26)
   )
-  (wire (pts (xy 363.22 189.23) (xy 367.03 189.23))
+  (wire (pts (xy 363.22 189.23) (xy 364.49 189.23))
     (stroke (width 0) (type default))
     (uuid b74fbe1e-a504-45c2-8fb4-65a121a6a78e)
   )
@@ -3263,6 +3315,10 @@
     (stroke (width 0) (type default))
     (uuid f0355bc3-439e-4eda-916b-f1ab84ff91d5)
   )
+  (wire (pts (xy 373.38 93.98) (xy 383.54 93.98))
+    (stroke (width 0) (type default))
+    (uuid f07a846d-c16d-4518-afcc-6c03174a7ef7)
+  )
   (wire (pts (xy 201.93 82.55) (xy 213.36 82.55))
     (stroke (width 0) (type default))
     (uuid f0ee2253-2e86-4f44-a516-0d41f92c142c)
@@ -3451,6 +3507,10 @@
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid 2dfd375a-c66f-4f8b-9eb8-bc440d00cd46)
   )
+  (label "Unst.power" (at 350.52 106.68 270) (fields_autoplaced)
+    (effects (font (size 1.27 1.27)) (justify right bottom))
+    (uuid 34f7bc77-daa3-4f27-96f7-f6a4d7347c05)
+  )
   (label "ACC.POWER" (at 120.65 39.37 270) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify right bottom))
     (uuid 35245a72-7b43-40f1-a8ea-f4936e0db534)
@@ -3599,7 +3659,7 @@
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid a17fa7ab-0bda-4430-9db7-1a94bf9ab589)
   )
-  (label "VIBRO" (at 238.76 97.79 0) (fields_autoplaced)
+  (label "VIBRO" (at 242.57 90.17 0) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid a62d5842-b05c-44b9-adcc-874b7b0b46a5)
   )
@@ -3618,6 +3678,10 @@
   (label "OSC_IN" (at 242.57 80.01 0) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid b667b577-2b0b-4060-a156-37bb501059d3)
+  )
+  (label "Unst.power" (at 386.08 123.19 270) (fields_autoplaced)
+    (effects (font (size 1.27 1.27)) (justify right bottom))
+    (uuid bb25e0b1-fea3-4eb8-bea4-bfba91e3bced)
   )
   (label "SWCLK" (at 299.72 105.41 180) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify right bottom))
@@ -4360,36 +4424,6 @@
     )
   )
 
-  (symbol (lib_id "power:+3.3V") (at 386.08 134.62 0) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no)
-    (uuid 1d3278b9-11fd-4da7-8a04-d6ec9c6f6529)
-    (property "Reference" "#PWR054" (at 386.08 138.43 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Value" "+3.3V" (at 389.89 132.08 0)
-      (effects (font (size 1.27 1.27)))
-    )
-    (property "Footprint" "" (at 386.08 134.62 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Datasheet" "" (at 386.08 134.62 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (pin "1" (uuid 748ff69c-3ff1-4c21-a694-0876e39297d9))
-    (instances
-      (project "Alatyr"
-        (path "/20e0dabc-19b0-48bb-afe3-a9923ffd2ee2"
-          (reference "#PWR054") (unit 1)
-        )
-      )
-      (project "Forger_v2_0"
-        (path "/e63e39d7-6ac0-4ffd-8aa3-1841a4541b55"
-          (reference "#PWR01") (unit 1)
-        )
-      )
-    )
-  )
-
   (symbol (lib_id "#USER:GND_GOST") (at 101.6 142.24 270) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 1db46514-99fb-4d8a-8c5b-a7e583132653)
@@ -4423,7 +4457,7 @@
   (symbol (lib_id "#USER:GND_GOST") (at 361.95 234.95 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 1e22fff8-3a42-49dd-9a62-0e982ea6c60c)
-    (property "Reference" "#PWR046" (at 361.95 241.3 0)
+    (property "Reference" "#PWR042" (at 361.95 241.3 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND_GOST" (at 361.95 238.76 0)
@@ -4439,7 +4473,7 @@
     (instances
       (project "Alatyr"
         (path "/20e0dabc-19b0-48bb-afe3-a9923ffd2ee2"
-          (reference "#PWR046") (unit 1)
+          (reference "#PWR042") (unit 1)
         )
       )
       (project "Bagryanets"
@@ -4737,7 +4771,7 @@
   (symbol (lib_id "#USER:GND_GOST") (at 372.11 62.23 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 35b17060-a96a-4b25-8c64-3ca85b1e410e)
-    (property "Reference" "#PWR034" (at 378.46 62.23 0)
+    (property "Reference" "#PWR046" (at 378.46 62.23 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND_GOST" (at 375.92 62.23 0)
@@ -4753,12 +4787,37 @@
     (instances
       (project "Alatyr"
         (path "/20e0dabc-19b0-48bb-afe3-a9923ffd2ee2"
-          (reference "#PWR034") (unit 1)
+          (reference "#PWR046") (unit 1)
         )
       )
       (project "Forger_v2_0"
         (path "/e63e39d7-6ac0-4ffd-8aa3-1841a4541b55"
           (reference "#PWR022") (unit 1)
+        )
+      )
+    )
+  )
+
+  (symbol (lib_id "Connector:TestPoint") (at 364.49 189.23 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no)
+    (uuid 36d3c30c-4d8b-4ca1-8cb3-85664904ebce)
+    (property "Reference" "TP6" (at 364.49 184.15 90)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Value" "3V" (at 364.49 180.34 90)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Footprint" "TestPoint:TestPoint_Pad_D1.0mm" (at 369.57 189.23 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "~" (at 369.57 189.23 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid fa070318-beef-4ca5-b65f-e97cb7e56016))
+    (instances
+      (project "Alatyr"
+        (path "/20e0dabc-19b0-48bb-afe3-a9923ffd2ee2"
+          (reference "TP6") (unit 1)
         )
       )
     )
@@ -4824,7 +4883,7 @@
   (symbol (lib_id "power:+3.3V") (at 280.67 161.29 270) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 3c371b62-61fb-4c93-afc2-580fdad877db)
-    (property "Reference" "#PWR033" (at 276.86 161.29 0)
+    (property "Reference" "#PWR032" (at 276.86 161.29 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+3.3V" (at 287.02 161.29 90)
@@ -4840,7 +4899,7 @@
     (instances
       (project "Alatyr"
         (path "/20e0dabc-19b0-48bb-afe3-a9923ffd2ee2"
-          (reference "#PWR033") (unit 1)
+          (reference "#PWR032") (unit 1)
         )
       )
       (project "Bagryanets"
@@ -4978,7 +5037,7 @@
   (symbol (lib_id "#USER:GND_GOST") (at 341.63 200.66 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 4adcd41b-a66d-4861-9b0d-aacb07b96c63)
-    (property "Reference" "#PWR039" (at 341.63 207.01 0)
+    (property "Reference" "#PWR036" (at 341.63 207.01 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND_GOST" (at 341.63 204.47 0)
@@ -4994,7 +5053,7 @@
     (instances
       (project "Alatyr"
         (path "/20e0dabc-19b0-48bb-afe3-a9923ffd2ee2"
-          (reference "#PWR039") (unit 1)
+          (reference "#PWR036") (unit 1)
         )
       )
       (project "Bagryanets"
@@ -5125,7 +5184,7 @@
   (symbol (lib_id "Device:R") (at 381 233.68 180) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 4f237ac3-7d05-4b5a-99e6-927bb05634dd)
-    (property "Reference" "R14" (at 383.54 232.41 0)
+    (property "Reference" "R13" (at 383.54 232.41 0)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "15k" (at 383.54 234.95 0)
@@ -5142,7 +5201,7 @@
     (instances
       (project "Alatyr"
         (path "/20e0dabc-19b0-48bb-afe3-a9923ffd2ee2"
-          (reference "R14") (unit 1)
+          (reference "R13") (unit 1)
         )
       )
       (project "Bagryanets"
@@ -5361,6 +5420,31 @@
     )
   )
 
+  (symbol (lib_id "Connector:TestPoint") (at 147.32 119.38 270) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no)
+    (uuid 56afb7fc-d178-4f90-b451-91b8eb6bb7d1)
+    (property "Reference" "TP1" (at 152.4 119.38 90)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Value" "BLE.RX" (at 156.21 119.38 90)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Footprint" "TestPoint:TestPoint_Pad_D1.0mm" (at 147.32 124.46 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "~" (at 147.32 124.46 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid a506e8de-8cfc-4f35-bc3f-0d750aea337e))
+    (instances
+      (project "Alatyr"
+        (path "/20e0dabc-19b0-48bb-afe3-a9923ffd2ee2"
+          (reference "TP1") (unit 1)
+        )
+      )
+    )
+  )
+
   (symbol (lib_id "Device:C") (at 229.87 88.9 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 57f3a844-0278-41d6-8708-6f3bf3e0bae3)
@@ -5416,7 +5500,7 @@
   (symbol (lib_id "power:+3.3V") (at 368.3 189.23 270) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 5949e982-016b-4330-9909-4f66ef6eb521)
-    (property "Reference" "#PWR048" (at 364.49 189.23 0)
+    (property "Reference" "#PWR044" (at 364.49 189.23 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+3.3V" (at 372.11 189.2299 90)
@@ -5432,7 +5516,7 @@
     (instances
       (project "Alatyr"
         (path "/20e0dabc-19b0-48bb-afe3-a9923ffd2ee2"
-          (reference "#PWR048") (unit 1)
+          (reference "#PWR044") (unit 1)
         )
       )
       (project "Bagryanets"
@@ -5538,7 +5622,7 @@
   (symbol (lib_id "#USER:GND_GOST") (at 64.77 215.9 270) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 5d3e3fba-8bcb-4cd6-bbb9-5db278868890)
-    (property "Reference" "#PWR02" (at 58.42 215.9 0)
+    (property "Reference" "#PWR03" (at 58.42 215.9 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND_GOST" (at 60.96 215.9 0)
@@ -5554,7 +5638,7 @@
     (instances
       (project "Alatyr"
         (path "/20e0dabc-19b0-48bb-afe3-a9923ffd2ee2"
-          (reference "#PWR02") (unit 1)
+          (reference "#PWR03") (unit 1)
         )
       )
       (project "Bagryanets"
@@ -5568,7 +5652,7 @@
   (symbol (lib_id "#USER:GND_GOST") (at 355.6 105.41 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 5e057272-6e4f-412f-b4a5-2922a3dd5b4f)
-    (property "Reference" "#PWR044" (at 355.6 111.76 0)
+    (property "Reference" "#PWR040" (at 355.6 111.76 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND_GOST" (at 355.6 109.22 0)
@@ -5584,7 +5668,7 @@
     (instances
       (project "Alatyr"
         (path "/20e0dabc-19b0-48bb-afe3-a9923ffd2ee2"
-          (reference "#PWR044") (unit 1)
+          (reference "#PWR040") (unit 1)
         )
       )
       (project "Bagryanets"
@@ -5598,7 +5682,7 @@
   (symbol (lib_id "Device:R") (at 350.52 146.05 180) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 67dccdd6-7fd0-4755-bc8a-154f5beec50b)
-    (property "Reference" "R12" (at 344.17 144.78 0)
+    (property "Reference" "R11" (at 344.17 144.78 0)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "1k" (at 344.17 147.32 0)
@@ -5615,7 +5699,7 @@
     (instances
       (project "Alatyr"
         (path "/20e0dabc-19b0-48bb-afe3-a9923ffd2ee2"
-          (reference "R12") (unit 1)
+          (reference "R11") (unit 1)
         )
       )
       (project "Bagryanets"
@@ -5651,6 +5735,31 @@
       (project "Bagryanets"
         (path "/e63e39d7-6ac0-4ffd-8aa3-1841a4541b55"
           (reference "#PWR060") (unit 1)
+        )
+      )
+    )
+  )
+
+  (symbol (lib_id "Connector:TestPoint") (at 392.43 213.36 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no)
+    (uuid 70ad9f66-e238-4e25-9f8f-a12d8f588dd6)
+    (property "Reference" "TP7" (at 392.43 208.28 90)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Value" "5V" (at 392.43 204.47 90)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Footprint" "TestPoint:TestPoint_Pad_D1.0mm" (at 397.51 213.36 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "~" (at 397.51 213.36 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid ad70598e-af1f-48ff-9dec-ce1be9447047))
+    (instances
+      (project "Alatyr"
+        (path "/20e0dabc-19b0-48bb-afe3-a9923ffd2ee2"
+          (reference "TP7") (unit 1)
         )
       )
     )
@@ -5747,6 +5856,56 @@
     )
   )
 
+  (symbol (lib_id "Connector:TestPoint") (at 213.36 82.55 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no)
+    (uuid 7608e620-4a8b-4c6a-8df8-14d7bbae07ae)
+    (property "Reference" "TP3" (at 213.36 77.47 90)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Value" "CLK" (at 213.36 73.66 90)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Footprint" "TestPoint:TestPoint_Pad_D1.0mm" (at 218.44 82.55 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "~" (at 218.44 82.55 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid c39b19cf-f781-4111-b8a2-5238b53c4b64))
+    (instances
+      (project "Alatyr"
+        (path "/20e0dabc-19b0-48bb-afe3-a9923ffd2ee2"
+          (reference "TP3") (unit 1)
+        )
+      )
+    )
+  )
+
+  (symbol (lib_id "Connector:TestPoint") (at 147.32 121.92 270) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no)
+    (uuid 78248089-de02-4cc2-8854-22b65742f4b1)
+    (property "Reference" "TP2" (at 152.4 121.92 90)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Value" "BLE.TX" (at 156.21 121.92 90)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Footprint" "TestPoint:TestPoint_Pad_D1.0mm" (at 147.32 127 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "~" (at 147.32 127 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid 9b28e239-7b91-417e-b3c5-f84f94260b65))
+    (instances
+      (project "Alatyr"
+        (path "/20e0dabc-19b0-48bb-afe3-a9923ffd2ee2"
+          (reference "TP2") (unit 1)
+        )
+      )
+    )
+  )
+
   (symbol (lib_id "Device:C") (at 266.7 39.37 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 79c083b2-48f4-45a4-b488-5b4ceeca46b7)
@@ -5804,36 +5963,6 @@
     )
   )
 
-  (symbol (lib_id "power:+3.3V") (at 350.52 116.84 0) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no)
-    (uuid 83fe97fd-979a-422d-84ab-c2f78b0ebf0a)
-    (property "Reference" "#PWR041" (at 350.52 120.65 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Value" "+3.3V" (at 354.33 114.3 0)
-      (effects (font (size 1.27 1.27)))
-    )
-    (property "Footprint" "" (at 350.52 116.84 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Datasheet" "" (at 350.52 116.84 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (pin "1" (uuid d36de24d-c96c-4343-907f-7aa18d828a4d))
-    (instances
-      (project "Alatyr"
-        (path "/20e0dabc-19b0-48bb-afe3-a9923ffd2ee2"
-          (reference "#PWR041") (unit 1)
-        )
-      )
-      (project "Forger_v2_0"
-        (path "/e63e39d7-6ac0-4ffd-8aa3-1841a4541b55"
-          (reference "#PWR01") (unit 1)
-        )
-      )
-    )
-  )
-
   (symbol (lib_id "Device:C") (at 165.1 194.31 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 9080cae5-493a-4a93-bbc2-4f21afb3ef6a)
@@ -5863,7 +5992,7 @@
   (symbol (lib_id "#USER:GND_GOST") (at 367.03 200.66 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 9171d29d-ce07-44e9-9106-cbf8bfb8b6ef)
-    (property "Reference" "#PWR047" (at 367.03 207.01 0)
+    (property "Reference" "#PWR043" (at 367.03 207.01 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND_GOST" (at 367.03 204.47 0)
@@ -5879,7 +6008,7 @@
     (instances
       (project "Alatyr"
         (path "/20e0dabc-19b0-48bb-afe3-a9923ffd2ee2"
-          (reference "#PWR047") (unit 1)
+          (reference "#PWR043") (unit 1)
         )
       )
       (project "Bagryanets"
@@ -5893,7 +6022,7 @@
   (symbol (lib_id "#USER:GND_GOST") (at 355.6 200.66 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 960c29f7-53c7-4655-b12b-afcab9f705d6)
-    (property "Reference" "#PWR045" (at 355.6 207.01 0)
+    (property "Reference" "#PWR041" (at 355.6 207.01 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND_GOST" (at 355.6 204.47 0)
@@ -5909,12 +6038,37 @@
     (instances
       (project "Alatyr"
         (path "/20e0dabc-19b0-48bb-afe3-a9923ffd2ee2"
-          (reference "#PWR045") (unit 1)
+          (reference "#PWR041") (unit 1)
         )
       )
       (project "Bagryanets"
         (path "/e63e39d7-6ac0-4ffd-8aa3-1841a4541b55"
           (reference "#PWR016") (unit 1)
+        )
+      )
+    )
+  )
+
+  (symbol (lib_id "Connector:TestPoint") (at 342.9 93.98 180) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no)
+    (uuid 96228034-8514-4e98-a958-0a4afd495260)
+    (property "Reference" "TP5" (at 342.9 99.06 90)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Value" "NPX" (at 342.9 102.87 90)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Footprint" "TestPoint:TestPoint_Pad_D1.0mm" (at 337.82 93.98 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "~" (at 337.82 93.98 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid 40e1a6ed-87d5-420a-8520-f77391d7f6ea))
+    (instances
+      (project "Alatyr"
+        (path "/20e0dabc-19b0-48bb-afe3-a9923ffd2ee2"
+          (reference "TP5") (unit 1)
         )
       )
     )
@@ -5949,10 +6103,35 @@
     )
   )
 
+  (symbol (lib_id "Connector:TestPoint") (at 224.79 189.23 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no)
+    (uuid 96f63dbf-9e32-4fbf-a9de-5b595009c22b)
+    (property "Reference" "TP4" (at 224.79 184.15 90)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Value" "AKB" (at 224.79 180.34 90)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Footprint" "TestPoint:TestPoint_Pad_D1.0mm" (at 229.87 189.23 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "~" (at 229.87 189.23 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid 8f4a0595-3030-43e5-a32e-23947061e298))
+    (instances
+      (project "Alatyr"
+        (path "/20e0dabc-19b0-48bb-afe3-a9923ffd2ee2"
+          (reference "TP4") (unit 1)
+        )
+      )
+    )
+  )
+
   (symbol (lib_id "power:+3.3V") (at 304.8 90.17 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 9799a9ae-58fa-4a7f-9cc6-7d02ab132113)
-    (property "Reference" "#PWR036" (at 304.8 93.98 0)
+    (property "Reference" "#PWR034" (at 304.8 93.98 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+3.3V" (at 308.61 87.63 0)
@@ -5968,7 +6147,7 @@
     (instances
       (project "Alatyr"
         (path "/20e0dabc-19b0-48bb-afe3-a9923ffd2ee2"
-          (reference "#PWR036") (unit 1)
+          (reference "#PWR034") (unit 1)
         )
       )
       (project "Forger_v2_0"
@@ -6010,7 +6189,7 @@
   (symbol (lib_id "#USER:N-Channel MOSFET_GOST") (at 383.54 156.21 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 9ddee4c2-5919-406b-9e12-852ebc13ce07)
-    (property "Reference" "VT4" (at 391.16 154.94 0)
+    (property "Reference" "VT3" (at 391.16 154.94 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "SI2302" (at 392.43 157.48 0)
@@ -6028,7 +6207,7 @@
     (instances
       (project "Alatyr"
         (path "/20e0dabc-19b0-48bb-afe3-a9923ffd2ee2"
-          (reference "VT4") (unit 1)
+          (reference "VT3") (unit 1)
         )
       )
       (project "Bagryanets"
@@ -6072,7 +6251,7 @@
   (symbol (lib_id "#USER:GND_GOST") (at 386.08 162.56 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid a285226d-62ec-4b96-b8a1-71d3267b5081)
-    (property "Reference" "#PWR055" (at 386.08 168.91 0)
+    (property "Reference" "#PWR050" (at 386.08 168.91 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND_GOST" (at 386.08 166.37 0)
@@ -6088,7 +6267,7 @@
     (instances
       (project "Alatyr"
         (path "/20e0dabc-19b0-48bb-afe3-a9923ffd2ee2"
-          (reference "#PWR055") (unit 1)
+          (reference "#PWR050") (unit 1)
         )
       )
       (project "Forger_v2_0"
@@ -6102,7 +6281,7 @@
   (symbol (lib_id "#USER:GND_GOST") (at 372.11 57.15 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid a364f8f6-4199-4538-a9ab-7db0e21176fc)
-    (property "Reference" "#PWR032" (at 378.46 57.15 0)
+    (property "Reference" "#PWR045" (at 378.46 57.15 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND_GOST" (at 375.92 57.15 0)
@@ -6118,7 +6297,7 @@
     (instances
       (project "Alatyr"
         (path "/20e0dabc-19b0-48bb-afe3-a9923ffd2ee2"
-          (reference "#PWR032") (unit 1)
+          (reference "#PWR045") (unit 1)
         )
       )
       (project "Forger_v2_0"
@@ -6162,7 +6341,7 @@
   (symbol (lib_id "#USER:GND_GOST") (at 341.63 223.52 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid a590b38b-8f42-4956-afa0-dbbb3d997a0c)
-    (property "Reference" "#PWR040" (at 341.63 229.87 0)
+    (property "Reference" "#PWR037" (at 341.63 229.87 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND_GOST" (at 341.63 227.33 0)
@@ -6178,7 +6357,7 @@
     (instances
       (project "Alatyr"
         (path "/20e0dabc-19b0-48bb-afe3-a9923ffd2ee2"
-          (reference "#PWR040") (unit 1)
+          (reference "#PWR037") (unit 1)
         )
       )
       (project "Bagryanets"
@@ -6221,7 +6400,7 @@
   (symbol (lib_id "Device:R") (at 386.08 146.05 180) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid ae62ee89-64a4-4836-9add-19c9e9c17b07)
-    (property "Reference" "R15" (at 379.73 144.78 0)
+    (property "Reference" "R14" (at 379.73 144.78 0)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "1k" (at 379.73 147.32 0)
@@ -6238,7 +6417,7 @@
     (instances
       (project "Alatyr"
         (path "/20e0dabc-19b0-48bb-afe3-a9923ffd2ee2"
-          (reference "R15") (unit 1)
+          (reference "R14") (unit 1)
         )
       )
       (project "Bagryanets"
@@ -6375,7 +6554,7 @@
   (symbol (lib_id "#USER:GND_GOST") (at 382.27 97.79 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid b2ca2e2e-773d-4cc9-907e-c0fd965f1ae3)
-    (property "Reference" "#PWR053" (at 382.27 104.14 0)
+    (property "Reference" "#PWR048" (at 382.27 104.14 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND_GOST" (at 382.27 101.6 0)
@@ -6391,7 +6570,7 @@
     (instances
       (project "Alatyr"
         (path "/20e0dabc-19b0-48bb-afe3-a9923ffd2ee2"
-          (reference "#PWR053") (unit 1)
+          (reference "#PWR048") (unit 1)
         )
       )
       (project "Bagryanets"
@@ -6436,7 +6615,7 @@
   (symbol (lib_id "Device:R") (at 306.07 214.63 180) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid b691f239-63e1-48ca-91c4-3c2c663806f1)
-    (property "Reference" "R11" (at 309.88 213.36 0)
+    (property "Reference" "R10" (at 309.88 213.36 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "10k" (at 309.88 215.9 0)
@@ -6453,7 +6632,7 @@
     (instances
       (project "Alatyr"
         (path "/20e0dabc-19b0-48bb-afe3-a9923ffd2ee2"
-          (reference "R11") (unit 1)
+          (reference "R10") (unit 1)
         )
       )
       (project "Bagryanets"
@@ -6467,7 +6646,7 @@
   (symbol (lib_id "Device:R") (at 304.8 95.25 180) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid b8be062d-1476-495b-868f-7489b9d2b31f)
-    (property "Reference" "R10" (at 307.34 93.9799 0)
+    (property "Reference" "R9" (at 307.34 93.9799 0)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "1.5k" (at 307.34 96.5199 0)
@@ -6484,7 +6663,7 @@
     (instances
       (project "Alatyr"
         (path "/20e0dabc-19b0-48bb-afe3-a9923ffd2ee2"
-          (reference "R10") (unit 1)
+          (reference "R9") (unit 1)
         )
       )
       (project "Bagryanets"
@@ -6524,7 +6703,7 @@
   (symbol (lib_id "#USER:GND_GOST") (at 306.07 220.98 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid bd06e131-a107-43f6-847f-9ee67faefce0)
-    (property "Reference" "#PWR037" (at 306.07 227.33 0)
+    (property "Reference" "#PWR035" (at 306.07 227.33 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND_GOST" (at 306.07 224.79 0)
@@ -6540,7 +6719,7 @@
     (instances
       (project "Alatyr"
         (path "/20e0dabc-19b0-48bb-afe3-a9923ffd2ee2"
-          (reference "#PWR037") (unit 1)
+          (reference "#PWR035") (unit 1)
         )
       )
       (project "Bagryanets"
@@ -6554,7 +6733,7 @@
   (symbol (lib_id "#USER:GND_GOST") (at 381 238.76 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid bee64716-f4e5-4eb8-8b9d-30fe5f36d641)
-    (property "Reference" "#PWR051" (at 381 245.11 0)
+    (property "Reference" "#PWR047" (at 381 245.11 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND_GOST" (at 381 242.57 0)
@@ -6570,7 +6749,7 @@
     (instances
       (project "Alatyr"
         (path "/20e0dabc-19b0-48bb-afe3-a9923ffd2ee2"
-          (reference "#PWR051") (unit 1)
+          (reference "#PWR047") (unit 1)
         )
       )
       (project "Bagryanets"
@@ -6636,7 +6815,7 @@
   (symbol (lib_id "#USER:GND_GOST") (at 392.43 223.52 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid c58b749f-d9bb-4066-840c-453164f09c4a)
-    (property "Reference" "#PWR056" (at 392.43 229.87 0)
+    (property "Reference" "#PWR051" (at 392.43 229.87 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND_GOST" (at 392.43 227.33 0)
@@ -6652,7 +6831,7 @@
     (instances
       (project "Alatyr"
         (path "/20e0dabc-19b0-48bb-afe3-a9923ffd2ee2"
-          (reference "#PWR056") (unit 1)
+          (reference "#PWR051") (unit 1)
         )
       )
       (project "Bagryanets"
@@ -6755,7 +6934,7 @@
   (symbol (lib_id "#USER:GND_GOST") (at 350.52 162.56 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid d695bf86-7d48-4518-8c44-5d4d672f13cf)
-    (property "Reference" "#PWR042" (at 350.52 168.91 0)
+    (property "Reference" "#PWR039" (at 350.52 168.91 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND_GOST" (at 350.52 166.37 0)
@@ -6771,7 +6950,7 @@
     (instances
       (project "Alatyr"
         (path "/20e0dabc-19b0-48bb-afe3-a9923ffd2ee2"
-          (reference "#PWR042") (unit 1)
+          (reference "#PWR039") (unit 1)
         )
       )
       (project "Forger_v2_0"
@@ -6785,7 +6964,7 @@
   (symbol (lib_id "#USER:N-Channel MOSFET_GOST") (at 347.98 156.21 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid d7000bd3-00d0-4138-b006-81194b63ebca)
-    (property "Reference" "VT3" (at 355.6 154.94 0)
+    (property "Reference" "VT2" (at 355.6 154.94 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "SI2302" (at 356.87 157.48 0)
@@ -6803,7 +6982,7 @@
     (instances
       (project "Alatyr"
         (path "/20e0dabc-19b0-48bb-afe3-a9923ffd2ee2"
-          (reference "VT3") (unit 1)
+          (reference "VT2") (unit 1)
         )
       )
       (project "Bagryanets"
@@ -7088,7 +7267,7 @@
   (symbol (lib_id "#USER:GND_GOST") (at 58.42 179.07 180) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid e3615340-b349-452a-a0bf-fa1ce2e73791)
-    (property "Reference" "#PWR03" (at 58.42 172.72 0)
+    (property "Reference" "#PWR02" (at 58.42 172.72 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND_GOST" (at 58.42 175.26 0)
@@ -7104,7 +7283,7 @@
     (instances
       (project "Alatyr"
         (path "/20e0dabc-19b0-48bb-afe3-a9923ffd2ee2"
-          (reference "#PWR03") (unit 1)
+          (reference "#PWR02") (unit 1)
         )
       )
       (project "Bagryanets"
@@ -7149,7 +7328,7 @@
   (symbol (lib_id "#USER:N-Channel MOSFET_GOST") (at 306.07 203.2 270) (mirror x) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid eae029ab-2f42-4ed1-8755-de4a8e75c5c6)
-    (property "Reference" "VT2" (at 306.07 194.31 90)
+    (property "Reference" "VT1" (at 306.07 194.31 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "SI2302" (at 306.07 196.85 90)
@@ -7167,7 +7346,7 @@
     (instances
       (project "Alatyr"
         (path "/20e0dabc-19b0-48bb-afe3-a9923ffd2ee2"
-          (reference "VT2") (unit 1)
+          (reference "VT1") (unit 1)
         )
       )
       (project "Bagryanets"
@@ -7212,7 +7391,7 @@
   (symbol (lib_id "#USER:GND_GOST") (at 284.48 222.25 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid f8fdc2f5-dce0-46e0-b18b-5a665335d3fc)
-    (property "Reference" "#PWR035" (at 284.48 228.6 0)
+    (property "Reference" "#PWR033" (at 284.48 228.6 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND_GOST" (at 284.48 226.06 0)
@@ -7228,7 +7407,7 @@
     (instances
       (project "Alatyr"
         (path "/20e0dabc-19b0-48bb-afe3-a9923ffd2ee2"
-          (reference "#PWR035") (unit 1)
+          (reference "#PWR033") (unit 1)
         )
       )
       (project "Bagryanets"
@@ -7242,7 +7421,7 @@
   (symbol (lib_id "Device:R") (at 381 223.52 180) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid f9899bf3-50e1-46a8-a56f-a6670a0072ae)
-    (property "Reference" "R13" (at 383.54 222.25 0)
+    (property "Reference" "R12" (at 383.54 222.25 0)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "110k" (at 383.54 224.79 0)
@@ -7259,7 +7438,7 @@
     (instances
       (project "Alatyr"
         (path "/20e0dabc-19b0-48bb-afe3-a9923ffd2ee2"
-          (reference "R13") (unit 1)
+          (reference "R12") (unit 1)
         )
       )
       (project "Bagryanets"
