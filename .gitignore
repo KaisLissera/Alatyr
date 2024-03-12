@@ -37,10 +37,12 @@
 *.hex
 
 # Debug files
+Debug/
 *.dSYM/
 *.su
 *.idb
 *.pdb
+*.launch
 
 # Kernel Module Compile Results
 *.mod*
@@ -50,3 +52,33 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+# CST results
+Model/
+ModelCache/
+Result/
+SP/
+Temp/
+
+# Kicad
+
+# Other
+*.ini
+*.cfg
+*.log
+*.info
+*.zip
+*.xml
+Datasheets/
+OLD/
+*.pdf
+*.inx
+*.bak_cir
+*.TNO
+*.launch
+*.lck
+
+
+# Pictures
+*.jpg
+*.png

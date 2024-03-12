@@ -1,4 +1,4 @@
-23109331558560150
+23112733914243373
 Antennas
 ANT_868_10d4x36
 PCB 75.7x37.5, AntPcb 14.8mm
@@ -62853,6 +62853,13 @@ Bagryanets_QR
 0
 0
 Kais_Lib
+Break
+
+
+0
+0
+0
+Kais_Lib
 Double_smd_solder
 
 
@@ -62894,6 +62901,13 @@ Speaker_9.5mm
 0
 2
 2
+Kais_Lib
+virez
+
+
+0
+0
+0
 LED_SMD
 LED-APA102-2020
 http://www.led-color.com/upload/201604/APA102-2020%20SMD%20LED.pdf
