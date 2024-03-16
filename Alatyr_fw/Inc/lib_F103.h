@@ -99,11 +99,6 @@ typedef enum {
 	retvTooHighSystemClock
 } retv_t;
 
-typedef enum {
-	Enable 		= 0,
-	Disable 	= 1
-} Ability_t;
-
 //Simple assert
 /////////////////////////////////////////////////////////////////////
 

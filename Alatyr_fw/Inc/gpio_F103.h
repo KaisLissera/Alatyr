@@ -44,7 +44,7 @@ typedef enum {
 } PinPupd_t;
 
 namespace gpio {
-	void SetupPin(GPIO_TypeDef* Gpio, uint8_t Pin,
+	void SetupPin(GPIO_TypeDef* gpio, uint8_t pin,
 			PinMode_t pinMode, PinPupd_t pinPupd = PullDown);
 	inline void ActivatePin(GPIO_TypeDef* gpio, uint32_t pin){
 		gpio->BSRR = 0b1UL << pin;
@@ -55,6 +55,12 @@ namespace gpio {
 		gpio->ODR ^= 0b1UL << pin;
 	}
 	uint8_t GetPinInput(GPIO_TypeDef* gpio, uint32_t pin);
+	inline void Afio1Remap(uint32_t afio1Remap){
+		AFIO->MAPR |= afio1Remap;
+	}
+	inline void Afio2Remap(uint32_t afio2Remap){
+		AFIO->MAPR2 |= afio2Remap;
+	}
 }//GPIO end
 
 //Simple buttons
