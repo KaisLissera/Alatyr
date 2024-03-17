@@ -59,22 +59,19 @@ uint32_t Uart_t::GetNumberOfBytesReady(){
 /////////////////////////////////////////////////////////////////////
 
 // Initialize memory to peripheral DMA TX channel
-void DmaTx_t::Init(DMA_Channel_TypeDef* _Channel, uint32_t PeriphRegAdr,
-		IRQn_Type dmaVector, uint8_t DmaIrqPrio , DmaChPrio_t ChPrio) {
+void DmaTx_t::Init(uint32_t PeriphRegAdr, uint8_t DmaIrqPrio, DmaChPrio_t ChPrio) {
 	// Setup class parameters
-	Channel = _Channel;
-	DmaChannelNumber = ReturnChannelNumberDma(Channel);
 	BufferStartPtr = 0;
 	BufferEndPtr = 0;
 
-	Channel -> CCR =  DMA_CCR_MINC; // Memory increment
-	Channel -> CCR |= ChPrio << DMA_CCR_PL_Pos; // DMA channel priority
-	Channel -> CCR |= DMA_CCR_DIR_Msk; // 1 - Read from memory
+	Dma->Channel -> CCR =  DMA_CCR_MINC; // Memory increment
+	Dma->Channel -> CCR |= ChPrio << DMA_CCR_PL_Pos; // DMA channel priority
+	Dma->Channel -> CCR |= DMA_CCR_DIR_Msk; // 1 - Read from memory
 	// Memory and peripheral sizes
-	Channel -> CCR |= (0b00 << DMA_CCR_MSIZE_Pos) | (0b00 << DMA_CCR_PSIZE_Pos); // 8 bit
-	nvic::SetupIrq(dmaVector, DmaIrqPrio);
-	Channel -> CCR |= DMA_CCR_TCIE;
-	Channel -> CPAR = PeriphRegAdr; //Peripheral register
+	Dma->Channel -> CCR |= (0b00 << DMA_CCR_MSIZE_Pos) | (0b00 << DMA_CCR_PSIZE_Pos); // 8 bit
+	nvic::SetupIrq(Dma->Irq, DmaIrqPrio);
+	Dma->Channel -> CCR |= DMA_CCR_TCIE;
+	Dma->Channel -> CPAR = PeriphRegAdr; //Peripheral register
 
 }
 
@@ -89,17 +86,17 @@ uint8_t DmaTx_t::StartTransmission() {
 	if (BufferEndPtr > BufferStartPtr)
 		NumberOfBytesReady = GetNumberOfBytesInBuffer();
 	else
-		NumberOfBytesReady = TX_BUFFER_SIZE - BufferStartPtr;
-	Channel -> CNDTR = NumberOfBytesReady;
-	Channel -> CMAR = (uint32_t)&Buffer[BufferStartPtr];
-	BufferStartPtr = (BufferStartPtr + NumberOfBytesReady) % TX_BUFFER_SIZE;
-	Channel -> CCR |= DMA_CCR_EN;
+		NumberOfBytesReady = BufferSize - BufferStartPtr;
+	Dma->Channel -> CNDTR = NumberOfBytesReady;
+	Dma->Channel -> CMAR = (uint32_t)&Buffer[BufferStartPtr];
+	BufferStartPtr = (BufferStartPtr + NumberOfBytesReady) % BufferSize;
+	Dma->Channel -> CCR |= DMA_CCR_EN;
 
 	return retvOk;
 }
 
 uint32_t DmaTx_t::CheckStatus() {
-	uint32_t temp = Channel -> CCR;
+	uint32_t temp = Dma->Channel -> CCR;
 	return temp & DMA_CCR_EN;
 }
 
@@ -107,11 +104,11 @@ uint32_t DmaTx_t::GetNumberOfBytesInBuffer() {
 	if (BufferEndPtr >= BufferStartPtr)
 		return BufferEndPtr - BufferStartPtr;
 	else
-		return TX_BUFFER_SIZE - BufferStartPtr + BufferEndPtr;
+		return BufferSize - BufferStartPtr + BufferEndPtr;
 }
 
 uint8_t DmaTx_t::WriteChar(uint8_t data) {
-	uint32_t EndPtrTemp = (BufferEndPtr + 1) % TX_BUFFER_SIZE;
+	uint32_t EndPtrTemp = (BufferEndPtr + 1) % BufferSize;
 	if (EndPtrTemp == BufferStartPtr)
 		return retvOutOfMemory;
 
@@ -121,9 +118,9 @@ uint8_t DmaTx_t::WriteChar(uint8_t data) {
 }
 
 uint8_t DmaTx_t::IrqHandler() {
-	if(DMA1->ISR & DMA_ISR_TCIF1 << 4*(DmaChannelNumber - 1)){
-		DMA1->IFCR = DMA_IFCR_CTCIF1 << 4*(DmaChannelNumber - 1);
-		Channel -> CCR &= ~DMA_CCR_EN;
+	if(DMA1->ISR & DMA_ISR_TCIF1 << 4*(Dma->Number - 1)){
+		DMA1->IFCR = DMA_IFCR_CTCIF1 << 4*(Dma->Number - 1);
+		Dma->Channel -> CCR &= ~DMA_CCR_EN;
 		StartTransmission();
 		return retvOk;
 	} else
@@ -134,33 +131,30 @@ uint8_t DmaTx_t::IrqHandler() {
 /////////////////////////////////////////////////////////////////////
 
 // Initialize peripheral to memory DMA RX channel
-void DmaRx_t::Init(DMA_Channel_TypeDef* _Channel, uint32_t PeriphRegAdr,
-		IRQn_Type dmaVector, uint8_t DmaIrqPrio, DmaChPrio_t ChPrio){
+void DmaRx_t::Init(uint32_t PeriphRegAdr, DmaChPrio_t ChPrio){
 	// Setup class parameters
-	Channel = _Channel;
 	BufferStartPtr = 0;
 
 	// Initialize DMA RX
-	Channel -> CCR =  DMA_CCR_MINC | DMA_CCR_CIRC; // Memory increment, circular mode
-	Channel -> CCR |= ChPrio << DMA_CCR_PL_Pos; // DMA channel priority
+	Dma->Channel -> CCR =  DMA_CCR_MINC | DMA_CCR_CIRC; // Memory increment, circular mode
+	Dma->Channel -> CCR |= ChPrio << DMA_CCR_PL_Pos; // DMA channel priority
 	// Memory and peripheral sizes)
-	Channel -> CCR |= (0b00 << DMA_CCR_MSIZE_Pos) | (0b00 << DMA_CCR_PSIZE_Pos); // 8 bit
-	Channel -> CPAR = PeriphRegAdr; //Peripheral register
-	DmaChannelNumber = ReturnChannelNumberDma(Channel);
+	Dma->Channel -> CCR |= (0b00 << DMA_CCR_MSIZE_Pos) | (0b00 << DMA_CCR_PSIZE_Pos); // 8 bit
+	Dma->Channel -> CPAR = PeriphRegAdr; //Peripheral register
 }
 
-uint32_t DmaRx_t::GetBufferEndPtr() {
-	return RX_BUFFER_SIZE - (Channel -> CNDTR);
+uint16_t DmaRx_t::GetBufferEndPtr() {
+	return BufferSize - (Dma->Channel -> CNDTR);
 }
 
 void DmaRx_t::Start() {
-	Channel -> CNDTR = RX_BUFFER_SIZE;
-	Channel -> CMAR = (uint32_t)&Buffer[0];
-	Channel -> CCR |= DMA_CCR_EN;
+	Dma->Channel -> CNDTR = BufferSize;
+	Dma->Channel -> CMAR = (uint32_t)&Buffer[0];
+	Dma->Channel -> CCR |= DMA_CCR_EN;
 }
 
 inline void DmaRx_t::Stop() {
-	Channel -> CCR &= ~DMA_CCR_EN;
+	Dma->Channel -> CCR &= ~DMA_CCR_EN;
 }
 
 uint32_t DmaRx_t::GetNumberOfBytesReady() {
@@ -168,17 +162,17 @@ uint32_t DmaRx_t::GetNumberOfBytesReady() {
 	if (BufferEndPtr >= BufferStartPtr)
 		return BufferEndPtr - BufferStartPtr;
 	else
-		return RX_BUFFER_SIZE - BufferStartPtr + BufferEndPtr;
+		return BufferSize - BufferStartPtr + BufferEndPtr;
 }
 
 uint32_t DmaRx_t::CheckStatus() {
-	uint32_t temp = Channel -> CCR;
+	uint32_t temp = Dma->Channel -> CCR;
 	return temp & DMA_CCR_EN;
 }
 
 uint8_t DmaRx_t::ReadChar(retv_t* retv) {
 	uint8_t temp = Buffer[BufferStartPtr];
-	BufferStartPtr = (BufferStartPtr + 1) % RX_BUFFER_SIZE;
+	BufferStartPtr = (BufferStartPtr + 1) % BufferSize;
 	return temp;
 }
 

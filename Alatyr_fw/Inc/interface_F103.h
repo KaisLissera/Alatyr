@@ -30,25 +30,6 @@ typedef struct{
 	IRQn_Type Irq;
 } DmaChannel_t;
 
-constexpr uint32_t ReturnChannelNumberDma(DMA_Channel_TypeDef* ch){
-	if(ch == DMA1_Channel1)
-		return 1;
-	else if(ch == DMA1_Channel2)
-		return 2;
-	else if(ch == DMA1_Channel3)
-		return 3;
-	else if(ch == DMA1_Channel4)
-		return 4;
-	else if(ch == DMA1_Channel5)
-		return 5;
-	else if(ch == DMA1_Channel6)
-		return 6;
-	else if(ch == DMA1_Channel7)
-		return 7;
-	else
-		ASSERT_SIMPLE(0); //Bad DMA channel name
-} //ReturnChNum_DMA end
-
 // Writer and reader interfaces
 /////////////////////////////////////////////////////////////////////
 class iWriter_t{
@@ -101,21 +82,21 @@ void DMAx_Channelx_IRQHandler(){
 } }
 */
 
-//DMA buffers sizes
-#define TX_BUFFER_SIZE 		(256UL)
-#define RX_BUFFER_SIZE 		(256UL)
-
 // Memory to peripheral DMA TX channel
 class DmaTx_t:public iWriter_t {
 protected:
-	uint8_t Buffer[TX_BUFFER_SIZE];
-	uint32_t BufferStartPtr;
-	uint32_t BufferEndPtr;
-	DMA_Channel_TypeDef* Channel;
-	uint8_t DmaChannelNumber;
+	uint8_t* Buffer;
+	uint16_t BufferSize;
+	uint16_t BufferStartPtr;
+	uint16_t BufferEndPtr;
+	DmaChannel_t* Dma;
 public:
-	void Init(DMA_Channel_TypeDef* _Channel, uint32_t PeriphRegAdr, IRQn_Type dmaVector,
-			uint8_t DmaIrqPrio = 0, DmaChPrio_t ChPrio = dmaLowChPrio);
+	DmaTx_t(DmaChannel_t* dma, uint8_t* buffer, uint16_t bufferSize){
+		Dma = dma;
+		Buffer = buffer;
+		BufferSize = bufferSize;
+	}
+	void Init(uint32_t PeriphRegAdr, uint8_t DmaIrqPrio = 0, DmaChPrio_t ChPrio = dmaLowChPrio);
 	uint32_t GetNumberOfBytesInBuffer();
 	uint32_t CheckStatus(); //0 - disable
 	uint8_t IrqHandler();
@@ -128,14 +109,18 @@ public:
 // Peripheral to memory DMA RX channel
 class DmaRx_t:public iReader_t {
 protected:
-	uint8_t Buffer[RX_BUFFER_SIZE];
-	uint32_t BufferStartPtr;
-	uint32_t GetBufferEndPtr();
-	DMA_Channel_TypeDef* Channel;
-	int8_t DmaChannelNumber;
+	uint8_t* Buffer;
+	uint16_t BufferSize;
+	uint16_t BufferStartPtr;
+	uint16_t GetBufferEndPtr();
+	DmaChannel_t* Dma;
 public:
-	void Init(DMA_Channel_TypeDef* _Channel, uint32_t PeriphRegAdr, IRQn_Type dmaVector,
-			uint8_t DmaIrqPrio = 0, DmaChPrio_t ChPrio = dmaLowChPrio);
+	DmaRx_t(DmaChannel_t* dma, uint8_t* buffer, uint16_t bufferSize){
+		Dma = dma;
+		Buffer = buffer;
+		BufferSize = bufferSize;
+	}
+	void Init(uint32_t PeriphRegAdr, DmaChPrio_t ChPrio = dmaLowChPrio);
 	void Start();
 	inline void Stop();
 	uint32_t CheckStatus(); //0 - disable

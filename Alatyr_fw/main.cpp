@@ -14,15 +14,18 @@
 #include <stm32f1xx.h>
 
 Uart_t CmdUart;
-DmaTx_t DmaTxUart1;
-DmaRx_t DmaRxUart1;
-Cli_t CmdCli(&DmaTxUart1, &DmaRxUart1);
-//Cli_t CmdCli(&CmdUart, &CmdUart); // Command line without DMA
+DmaChannel_t DmaCh4 = {.Channel = DMA1_Channel4, .Number = 4, .Irq = DMA1_Channel4_IRQn};
+uint8_t DmaTxBuffer[128];
+DmaTx_t DmaTxUart1(&DmaCh4, DmaTxBuffer, 128);
+//DmaChannel_t DmaCh5 = {.Channel = DMA1_Channel5, .Number = 5, .Irq = DMA1_Channel5_IRQn};
+//uint8_t DmaRxBuffer[128];
+//DmaRx_t DmaRxUart1(&DmaCh5, DmaRxBuffer, 128);
+Cli_t CmdCli(&DmaTxUart1, &CmdUart);
 
+#define NEOPIXEL_LENGTH 3
 DmaChannel_t DmaCh5 = {.Channel = DMA1_Channel5, .Number = 5, .Irq = DMA1_Channel5_IRQn};
-//Timer_t NeopixelTim1;
-uint8_t NeopixelBuffer[24*4];
-Neopixel_t LedStrip(TIM1, 1, &DmaCh5, NeopixelBuffer, 3);
+uint8_t NeopixelBuffer[24*NEOPIXEL_LENGTH];
+Neopixel_t LedStrip(TIM1, 1, &DmaCh5, NeopixelBuffer, NEOPIXEL_LENGTH);
 
 extern "C" {
 	void DMA1_Channel4_IRQHandler(){
@@ -62,35 +65,26 @@ int main(){
 	CmdUart.Enable();
 
 	//USART1 DMA for command line
-	DmaTxUart1.Init(DMA1_Channel4, (uint32_t)&USART1->DR, DMA1_Channel4_IRQn);
-	DmaRxUart1.Init(DMA1_Channel5, (uint32_t)&USART1->DR, DMA1_Channel5_IRQn);
-	DmaRxUart1.Start();
+	DmaTxUart1.Init((uint32_t)&USART1->DR);
+//	DmaRxUart1.Init((uint32_t)&USART1->DR);
+//	DmaRxUart1.Start();
 
 	//Neopixel
 	gpio::SetupPin(PB1, Output10MHzPushPull);
 	gpio::ActivatePin(PB1); // 5V DC-DC enable
 	gpio::SetupPin(PA8, AfOutput10MHzPushPull); // TIM1 channel 1
 	LedStrip.Init(rcc::GetCurrentTimersClock(currentApb2Clock), 0);
+	LedStrip.Clear();
 
+	CmdCli.Printf("%d\n\r",currentSystemClock);
+	uint32_t counter = 0;
 	while(1){
-		CmdCli.Printf("Current clock %d\n\r", currentSystemClock);
-		LedStrip.WriteLedColor(0, 0x0F0000);
-		LedStrip.WriteLedColor(1, 0x000F00);
-		LedStrip.WriteLedColor(2, 0x00000F);
+		LedStrip.WriteLedColor(0, MakeHexGrbColor(counter & 255, 127));
+		LedStrip.WriteLedColor(1, MakeHexGrbColor((counter + 1) & 255, 127));
+		LedStrip.WriteLedColor(2, MakeHexGrbColor((counter + 2) & 255, 127));
 		LedStrip.Update();
-		DelayMs(100);
-
-		LedStrip.WriteLedColor(0, 0x000F00);
-		LedStrip.WriteLedColor(1, 0x00000F);
-		LedStrip.WriteLedColor(2, 0x0F0000);
-		LedStrip.Update();
-		DelayMs(100);
-
-		LedStrip.WriteLedColor(0, 0x00000F);
-		LedStrip.WriteLedColor(1, 0x0F0000);
-		LedStrip.WriteLedColor(2, 0x000F00);
-		LedStrip.Update();
-		DelayMs(100);
+		counter++;
+		DelayMs(50);
 	}
 	return 0;
 }
