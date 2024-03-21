@@ -19,11 +19,11 @@ void gpio::SetupPin(GPIO_TypeDef* Gpio, uint8_t Pin, PinMode_t pinMode, PinPupd_
 		Gpio -> CRH &= ~(0b1111UL << (4*(Pin - 8)));
 		Gpio -> CRH |= pinMode << (4*(Pin - 8));
 	}
-	Gpio->ODR |= pinPupd;
+	Gpio->ODR |= pinPupd << Pin;
 }
 
 uint8_t gpio::GetPinInput(GPIO_TypeDef* gpio, uint32_t pin) {
-	if((gpio->IDR & (0b1UL << pin)) == 0)
+	if((gpio->IDR & (0b1 << pin)) == 0)
 		return 0;
 	else
 		return 1;

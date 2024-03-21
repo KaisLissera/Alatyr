@@ -97,6 +97,7 @@ public:
 			ASSERT_SIMPLE(0);
 		}
 	}
+
 	void Init(){
 		gpio::SetupPin(Gpio,Pin,InputWithPull,PullUp);
 	}
