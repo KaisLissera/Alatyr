@@ -34,6 +34,7 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Alatyr_fw/CMSIS}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Alatyr_fw}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Alatyr_fw/Startup}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Alatyr_fw/FreeRTOS}&quot;"/>
 								</option>
 								<inputType id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.assembler.input.1061925337" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.assembler.input"/>
 							</tool>
@@ -51,6 +52,7 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Alatyr_fw/CMSIS}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Alatyr_fw}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Alatyr_fw/Startup}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Alatyr_fw/FreeRTOS}&quot;"/>
 								</option>
 								<option id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.option.languagestandard.524429061" name="Language standard" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.option.languagestandard" useByScannerDiscovery="true" value="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.option.languagestandard.value.gnu17" valueType="enumerated"/>
 								<option id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.option.slow_flash_data.1910157583" name="Assume loading data from flash is slower than fetching instruction (-mslow-flash-data)" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.option.slow_flash_data" useByScannerDiscovery="false" value="true" valueType="boolean"/>
@@ -70,6 +72,7 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Alatyr_fw/CMSIS}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Alatyr_fw}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Alatyr_fw/Startup}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Alatyr_fw/FreeRTOS}&quot;"/>
 								</option>
 								<option id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.compiler.option.languagestandard.364597185" name="Language standard" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.compiler.option.languagestandard" useByScannerDiscovery="true" value="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.compiler.option.languagestandard.value.gnupp17" valueType="enumerated"/>
 								<inputType id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.compiler.input.cpp.1248601671" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.compiler.input.cpp"/>
@@ -135,6 +138,7 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/CMSIS}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Alatyr_fw/Startup}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/FreeRTOS}&quot;"/>
 								</option>
 								<inputType id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.assembler.input.1544948417" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.assembler.input"/>
 							</tool>
@@ -152,6 +156,7 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/CMSIS}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Alatyr_fw/Startup}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/FreeRTOS}&quot;"/>
 								</option>
 								<inputType id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.input.c.921760477" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.input.c"/>
 							</tool>
@@ -169,6 +174,7 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/CMSIS}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Alatyr_fw/Startup}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/FreeRTOS}&quot;"/>
 								</option>
 								<inputType id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.compiler.input.cpp.2002724408" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.cpp.compiler.input.cpp"/>
 							</tool>

@@ -10,7 +10,7 @@
 //Uart_t
 /////////////////////////////////////////////////////////////////////
 
-void Uart_t::Init(USART_TypeDef* _Usart, uint32_t CurrentClockHz, uint32_t Bod) {
+void Uart_t::Init(USART_TypeDef* _Usart, uint32_t CurrentClockHz, uint32_t Bod){
 	Usart = _Usart; // Set class parameter
 
 	// USART must be disabled before configuring
@@ -26,18 +26,18 @@ void Uart_t::UpdateBaudrate(uint32_t CurrentClockHz, uint32_t Bod){
 }
 
 //Simple UART byte transmit, wait until fully transmitted
-uint8_t Uart_t::WriteChar(uint8_t data) {
+uint8_t Uart_t::WriteChar(uint8_t data){
 	while ((Usart->SR & USART_SR_TXE) == 0) {}
 	Usart->DR = data;
 	return retvOk;
 }
 
 //Simple UART byte receive, wait until receive
-uint8_t Uart_t::ReadChar(retv_t* retv) {
+uint8_t Uart_t::ReadChar(retv_t* retv){
 	uint32_t timeout = 0xFFFF;
-	while ((Usart->SR & USART_SR_RXNE) == 0) {
+	while((Usart->SR & USART_SR_RXNE) == 0){
 		timeout--;
-		if(timeout == 0) {
+		if(timeout == 0){
 			*retv = retvTimeout;
 			return 0; // Can't receive data
 		}
@@ -59,7 +59,7 @@ uint32_t Uart_t::GetNumberOfBytesReady(){
 /////////////////////////////////////////////////////////////////////
 
 // Initialize memory to peripheral DMA TX channel
-void DmaTx_t::Init(uint32_t PeriphRegAdr, uint8_t DmaIrqPrio, DmaChPrio_t ChPrio) {
+void DmaTx_t::Init(uint32_t PeriphRegAdr, uint8_t DmaIrqPrio, DmaChPrio_t ChPrio){
 	// Setup class parameters
 	BufferStartPtr = 0;
 	BufferEndPtr = 0;
@@ -75,7 +75,7 @@ void DmaTx_t::Init(uint32_t PeriphRegAdr, uint8_t DmaIrqPrio, DmaChPrio_t ChPrio
 
 }
 
-uint8_t DmaTx_t::StartTransmission() {
+uint8_t DmaTx_t::StartTransmission(){
 	if(CheckStatus() != 0)
 		return retvBusy; //Nothing changes if DMA already running
 
@@ -95,19 +95,19 @@ uint8_t DmaTx_t::StartTransmission() {
 	return retvOk;
 }
 
-uint32_t DmaTx_t::CheckStatus() {
+uint32_t DmaTx_t::CheckStatus(){
 	uint32_t temp = Dma->Channel -> CCR;
 	return temp & DMA_CCR_EN;
 }
 
-uint32_t DmaTx_t::GetNumberOfBytesInBuffer() {
+uint32_t DmaTx_t::GetNumberOfBytesInBuffer(){
 	if (BufferEndPtr >= BufferStartPtr)
 		return BufferEndPtr - BufferStartPtr;
 	else
 		return BufferSize - BufferStartPtr + BufferEndPtr;
 }
 
-uint8_t DmaTx_t::WriteChar(uint8_t data) {
+uint8_t DmaTx_t::WriteChar(uint8_t data){
 	uint32_t EndPtrTemp = (BufferEndPtr + 1) % BufferSize;
 	if (EndPtrTemp == BufferStartPtr)
 		return retvOutOfMemory;
@@ -117,7 +117,7 @@ uint8_t DmaTx_t::WriteChar(uint8_t data) {
 	return retvOk;
 }
 
-uint8_t DmaTx_t::IrqHandler() {
+uint8_t DmaTx_t::IrqHandler(){
 	if(DMA1->ISR & DMA_ISR_TCIF1 << 4*(Dma->Number - 1)){
 		DMA1->IFCR = DMA_IFCR_CTCIF1 << 4*(Dma->Number - 1);
 		Dma->Channel -> CCR &= ~DMA_CCR_EN;
@@ -143,21 +143,21 @@ void DmaRx_t::Init(uint32_t PeriphRegAdr, DmaChPrio_t ChPrio){
 	Dma->Channel -> CPAR = PeriphRegAdr; //Peripheral register
 }
 
-uint16_t DmaRx_t::GetBufferEndPtr() {
+uint16_t DmaRx_t::GetBufferEndPtr(){
 	return BufferSize - (Dma->Channel -> CNDTR);
 }
 
-void DmaRx_t::Start() {
+void DmaRx_t::Start(){
 	Dma->Channel -> CNDTR = BufferSize;
 	Dma->Channel -> CMAR = (uint32_t)&Buffer[0];
 	Dma->Channel -> CCR |= DMA_CCR_EN;
 }
 
-inline void DmaRx_t::Stop() {
+inline void DmaRx_t::Stop(){
 	Dma->Channel -> CCR &= ~DMA_CCR_EN;
 }
 
-uint32_t DmaRx_t::GetNumberOfBytesReady() {
+uint32_t DmaRx_t::GetNumberOfBytesReady(){
 	uint32_t BufferEndPtr = GetBufferEndPtr();
 	if (BufferEndPtr >= BufferStartPtr)
 		return BufferEndPtr - BufferStartPtr;
@@ -165,12 +165,12 @@ uint32_t DmaRx_t::GetNumberOfBytesReady() {
 		return BufferSize - BufferStartPtr + BufferEndPtr;
 }
 
-uint32_t DmaRx_t::CheckStatus() {
+uint32_t DmaRx_t::CheckStatus(){
 	uint32_t temp = Dma->Channel -> CCR;
 	return temp & DMA_CCR_EN;
 }
 
-uint8_t DmaRx_t::ReadChar(retv_t* retv) {
+uint8_t DmaRx_t::ReadChar(retv_t* retv){
 	uint8_t temp = Buffer[BufferStartPtr];
 	BufferStartPtr = (BufferStartPtr + 1) % BufferSize;
 	return temp;
@@ -179,14 +179,41 @@ uint8_t DmaRx_t::ReadChar(retv_t* retv) {
 //Cli_t
 /////////////////////////////////////////////////////////////////////
 
-void Cli_t::PutString(const char* text) {
-	uint8_t length = strlen(text);
-	for(uint32_t i = 0; i < length; i++) {
-		TxChannel->WriteChar((uint8_t)text[i]);
+int32_t strToInt(char* text, retv_t* retv){
+	uint8_t ptr = 0;
+	int32_t number = 0;
+	if(text[0] == '-'){
+		ptr++;
+		while((text[ptr] >= '0') and (text[ptr] <= '9')){
+			number = number*10 - (text[ptr] - '0');
+			ptr++;
+		}
+	} else if((text[0] >= '0') and (text[0] <= '9')){
+		while((text[ptr] >= '0') and (text[ptr] <= '9')){
+			number = number*10 + (text[ptr] - '0');
+			ptr++;
+		}
+	} else{
+		*retv = retvNotANumber;
+		return 0;
+	}
+
+	if(text[ptr] == '\0'){
+		*retv = retvOk;
+		return number;
+	} else {
+		*retv = retvNotANumber;
+		return 0;
 	}
 }
 
-void Cli_t::PutBinary(uint32_t number) {
+void Cli_t::PutString(const char* text){
+	uint8_t length = strlen(text);
+	for(uint32_t i = 0; i < length; i++)
+		TxChannel->WriteChar((uint8_t)text[i]);
+}
+
+void Cli_t::PutBinary(uint32_t number){
 	TxChannel->WriteChar((uint8_t)'0');
 	TxChannel->WriteChar((uint8_t)'b');
 	if(number == 0){
@@ -195,10 +222,9 @@ void Cli_t::PutBinary(uint32_t number) {
 	}
 
 	uint32_t mask = 1UL << 31;
-	while((number & mask) == 0) {
+	while((number & mask) == 0)
 		mask = mask >> 1;
-	}
-	while(mask > 0) {
+	while(mask > 0){
 		if((number & mask))
 			TxChannel->WriteChar((uint8_t)'1');
 		else
@@ -207,7 +233,7 @@ void Cli_t::PutBinary(uint32_t number) {
 	}
 }
 
-void Cli_t::PutUnsignedInt(uint32_t number) {
+void Cli_t::PutUnsignedInt(uint32_t number){
 	if(number == 0){
 		TxChannel->WriteChar((uint8_t)'0');
 		return;
@@ -221,12 +247,11 @@ void Cli_t::PutUnsignedInt(uint32_t number) {
 		IntBuf[i] = '0' + temp;
 		i++;
 	}
-	for(uint32_t k = 0; k < i; k++) {
+	for(uint32_t k = 0; k < i; k++)
 		TxChannel->WriteChar((uint8_t)IntBuf[i - k - 1]);
-	}
 }
 
-void Cli_t::PutUnsignedHex(uint32_t number) {
+void Cli_t::PutUnsignedHex(uint32_t number){
 	TxChannel->WriteChar((uint8_t)'0');
 	TxChannel->WriteChar((uint8_t)'x');
 	if(number == 0){
@@ -245,9 +270,8 @@ void Cli_t::PutUnsignedHex(uint32_t number) {
 			IntBuf[i] = 'A' + temp - 10;
 		i++;
 	}
-	for(uint32_t k = 0; k < i; k++) {
+	for(uint32_t k = 0; k < i; k++)
 		TxChannel->WriteChar((uint8_t)IntBuf[i - k - 1]);
-	}
 }
 
 void Cli_t::PutInt(int32_t number) {
@@ -259,15 +283,15 @@ void Cli_t::PutInt(int32_t number) {
 	}
 }
 
-void Cli_t::Printf(const char* text, ...) {
+void Cli_t::Printf(const char* text, ...){
 	// String format processing
 	va_list args;
 	va_start(args, text); // Start string processing
 	uint8_t length = strlen(text);
-	for(uint32_t i = 0; i < length; i++) {
+	for(uint32_t i = 0; i < length; i++){
 		if(text[i] == '%'){ // if argument found
 			i++;
-			switch(text[i]) {
+			switch(text[i]){
 				case 'd': // integer
 					PutInt(va_arg(args,int));
 					break;
@@ -298,84 +322,61 @@ void Cli_t::Printf(const char* text, ...) {
 	TxChannel->StartTransmission();
 }
 
-char* Cli_t::Read() {
-	uint32_t CmdBufferPtr = 0;
-	char temp = (char)RxChannel->ReadChar(NULL);
+char* Cli_t::Read(){
+	char temp;
+	uint8_t CmdBufferPtr = 0;
+
+	if(RxChannel->GetNumberOfBytesReady() == 0)
+		return NULL;
 	//Clear buffer beginning from useless symbols
-	while((temp == '\n') || (temp == ' ')) {
-		temp = (char)RxChannel->ReadChar(NULL);
+	while((RxChannel->GetNumberOfBytesReady() != 0)){
+		temp = RxChannel->ReadChar(NULL);
+		if((temp != '\r') or (temp != '\n'))
+			break;
 	}
+	if(RxChannel->GetNumberOfBytesReady() == 0)
+		return NULL;
+	CommandBuffer[CmdBufferPtr] = temp;
+	CmdBufferPtr++;
 	//Get command from buffer
-	while((temp != '\r') && (temp != '\n') && (temp != ' ')) {
+	while((RxChannel->GetNumberOfBytesReady() != 0)){
+		temp = RxChannel->ReadChar(NULL);
+		if((temp == '\r') or (temp == '\n') or (temp == ' '))
+			break;
 		CommandBuffer[CmdBufferPtr] = temp;
 		CmdBufferPtr++;
-		temp = (char)RxChannel->ReadChar(NULL);
 	}
-	//Add terminators to strings
+	//Add terminator to string
 	CommandBuffer[CmdBufferPtr] = '\0';
-	ArgBuffer[0] = '\0';
-	//
-	if(EchoEnabled)
-		Echo();
 	return CommandBuffer;
 }
 
-char* Cli_t::ReadLine() {
-	uint32_t CmdBufferPtr = 0;
-	char temp = (char)RxChannel->ReadChar(NULL);
+char* Cli_t::ReadLine(){
+	char temp;
+	uint8_t CmdBufferPtr = 0;
+
+	if(RxChannel->GetNumberOfBytesReady() == 0)
+		return NULL;
 	//Clear buffer beginning from useless symbols
-	while((temp == '\n') || (temp == ' ')) {
-		temp = (char)RxChannel->ReadChar(NULL);
+	while((RxChannel->GetNumberOfBytesReady() != 0)){
+		temp = RxChannel->ReadChar(NULL);
+		if((temp != '\r') or (temp != '\n'))
+			break;
 	}
+	if(RxChannel->GetNumberOfBytesReady() == 0)
+		return NULL;
+
+	CommandBuffer[CmdBufferPtr] = temp;
+	CmdBufferPtr++;
 	//Get command from buffer
-	while((temp != '\r') && (temp != '\n')) {
+	while((RxChannel->GetNumberOfBytesReady() != 0)){
+		temp = RxChannel->ReadChar(NULL);
+		if((temp == '\r') or (temp == '\n'))
+			break;
 		CommandBuffer[CmdBufferPtr] = temp;
 		CmdBufferPtr++;
-		temp = (char)RxChannel->ReadChar(NULL);
 	}
-	//Add terminators to strings
+	//Add terminator to string
 	CommandBuffer[CmdBufferPtr] = '\0';
-	ArgBuffer[0] = '\0';
-	//
-	if(EchoEnabled)
-		Echo();
 	return CommandBuffer;
-}
-
-void Cli_t::ReadCommand() {
-	uint32_t CmdBufferPtr = 0;
-	char temp = (char)RxChannel->ReadChar(NULL);
-	//Clear buffer beginning from useless symbols
-	while((temp == '\n') || (temp == ' ')) {
-		temp = (char)RxChannel->ReadChar(NULL);
-	}
-	//Get command from buffer
-	while((temp != '\r') && (temp != '\n') && (temp != ' ') && (RxChannel->GetNumberOfBytesReady() != 0)) {
-		CommandBuffer[CmdBufferPtr] = temp;
-		CmdBufferPtr++;
-		temp = (char)RxChannel->ReadChar(NULL);
-	}
-	//Get argument from buffer if exist
-	uint32_t ArgumentBufferPtr = 0;
-	if (temp == ' ') {
-		temp = (char)RxChannel->ReadChar(NULL);
-		while((temp != '\r') && (temp != '\n') && (RxChannel->GetNumberOfBytesReady() != 0)) {
-			ArgBuffer[ArgumentBufferPtr] = temp;
-			ArgumentBufferPtr++;
-			temp = (char)RxChannel->ReadChar(NULL);
-		}
-	}
-	//Add terminators to strings
-	ArgBuffer[ArgumentBufferPtr] = '\0';
-	CommandBuffer[CmdBufferPtr] = '\0';
-	//
-	if(EchoEnabled)
-		Echo();
-}
-
-void Cli_t::Echo() {
-	if(ArgBuffer[0] != '\0')
-		Printf("[ECHO] %s %s\n\r",CommandBuffer, ArgBuffer);
-	else
-		Printf("[ECHO] %s\n\r", CommandBuffer);
 }

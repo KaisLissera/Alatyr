@@ -133,8 +133,9 @@ public:
 //Cli_t - Simple command line interface
 /////////////////////////////////////////////////////////////////////
 
+int32_t strToInt(char* text);
+
 #define COMMAND_BUFFER_SIZE (128UL)
-#define ARG_BUFFER_SIZE (10UL)
 
 class Cli_t {
 protected:
@@ -151,15 +152,11 @@ public:
 		RxChannel = _RxChannel;
 	}
 	char CommandBuffer[COMMAND_BUFFER_SIZE];
-	char ArgBuffer[ARG_BUFFER_SIZE];
-	uint8_t EchoEnabled = 1;
 	//Methods
-	void Clear() { CommandBuffer[0] = '\0'; ArgBuffer[0] = '\0';}
-	void Echo();
+	void Clear() {CommandBuffer[0] = '\0';}
 	void Printf(const char* text, ...);
 	char* Read();
 	char* ReadLine();
-	void ReadCommand(); //Read command with argument if exist, put in buffer
 };
 
 #endif /* INC_INTERFACE_H_ */

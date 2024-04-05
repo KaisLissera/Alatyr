@@ -12,6 +12,10 @@
 #include <stdint.h>
 #include <stm32f103xb.h>
 
+#ifndef HSE_FREQ_HZ
+	#error "define HSE_FREQ_HZ in board.h"
+#endif
+
 //GPIO pins definitions
 /////////////////////////////////////////////////////////////////////
 #define PA0		GPIOA, 0
@@ -68,7 +72,7 @@
 //Return values
 /////////////////////////////////////////////////////////////////////
 
-typedef enum {
+typedef enum{
 	retvOk,
 	retvFail,
 	retvTimeout,
@@ -110,32 +114,32 @@ typedef enum {
 //static CircBuffer_t<uint8_t,1024> test;
 
 template <typename T, uint32_t Size>
-class CircBuffer_t {
+class CircBuffer_t{
 private:
 	T Buffer_[Size];
 	uint32_t start_;
 	uint32_t end_;
 public:
-	CircBuffer_t() {
+	CircBuffer_t(){
 		start_ = 0;
 		end_ = 0;
 	}
-	T Read() {
+	T Read(){
 		T temp = Buffer_[start_];
 		start_ = (start_ + 1) % Size;
 		return temp;
 	}
-	uint32_t Length() {
+	uint32_t Length(){
 		if (end_ > start_)
 			return end_ - start_;
 		else
 			return Size - start_ + end_;
 	}
-	void Write(T data) {
+	void Write(T data){
 		end_ = (end_ + 1) % Size;
 		Buffer_[end_] = data;
 	}
-	void Clear() {
+	void Clear(){
 		start_ = 0;
 		end_ = 0;
 	}

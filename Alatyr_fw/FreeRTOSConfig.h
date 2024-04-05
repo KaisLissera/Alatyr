@@ -45,13 +45,15 @@
 	extern uint32_t SystemCoreClock;
 #endif
 
+//extern uint32_t currentSystemClock;
+
 #define configUSE_PREEMPTION			0 // Co-operative sheduler
 #define configUSE_IDLE_HOOK				0
 #define configUSE_TICK_HOOK				0
 #define configCPU_CLOCK_HZ				(32000000)
-#define configTICK_RATE_HZ				((TickType_t)10000)
+#define configTICK_RATE_HZ				((TickType_t)1000)
 #define configMINIMAL_STACK_SIZE		((unsigned short)64)
-#define configTOTAL_HEAP_SIZE			((size_t)(3*1024))
+#define configTOTAL_HEAP_SIZE			((size_t)(8*1024))
 #define configMAX_TASK_NAME_LEN			(4)
 #define configUSE_TRACE_FACILITY		0
 #define configUSE_16_BIT_TICKS			0
@@ -60,7 +62,7 @@
 #define configQUEUE_REGISTRY_SIZE		8
 #define configCHECK_FOR_STACK_OVERFLOW	0
 #define configUSE_RECURSIVE_MUTEXES		0
-#define configUSE_MALLOC_FAILED_HOOK	0
+#define configUSE_MALLOC_FAILED_HOOK	1
 #define configSUPPORT_DINAMIC_ALLOCATION 1
 #define configUSE_APPLICATION_TASK_TAG	0
 #define configUSE_COUNTING_SEMAPHORES	0

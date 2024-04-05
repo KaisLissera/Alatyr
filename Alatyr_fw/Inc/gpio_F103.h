@@ -17,7 +17,7 @@
 //GPIO setup
 /////////////////////////////////////////////////////////////////////
 
-typedef enum {
+typedef enum{
 	InputAnalog 			= 0b0000,
 	InputFloating 			= 0b0100,
 	InputWithPull 			= 0b1000,
@@ -38,12 +38,12 @@ typedef enum {
 	AfOutput50MHzOpenDrain 	= 0b1111,
 } PinMode_t;
 
-typedef enum {
+typedef enum{
 	PullUp 		= 1,
 	PullDown 	= 0
 } PinPupd_t;
 
-namespace gpio {
+namespace gpio{
 	void SetupPin(GPIO_TypeDef* gpio, uint8_t pin,
 			PinMode_t pinMode, PinPupd_t pinPupd = PullDown);
 	inline void ActivatePin(GPIO_TypeDef* gpio, uint32_t pin){
@@ -66,21 +66,21 @@ namespace gpio {
 //Simple buttons
 /////////////////////////////////////////////////////////////////////
 
-typedef enum {
+typedef enum{
 	Idle,
 	HoldDown,
 	Pressed,
 	Released
 } ButtonState_t;
 
-class Button_t {
+class Button_t{
 private:
 	GPIO_TypeDef* Gpio;
 	uint8_t Pin;
 	uint8_t IdleState;
 	uint8_t PreviousState;
 public:
-	Button_t(GPIO_TypeDef* _Gpio, uint8_t _Pin, PinPupd_t _PupdType) {
+	Button_t(GPIO_TypeDef* _Gpio, uint8_t _Pin, PinPupd_t _PupdType){
 		Gpio =_Gpio;
 		Pin = _Pin;
 		//

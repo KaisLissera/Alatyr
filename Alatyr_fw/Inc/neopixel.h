@@ -30,8 +30,7 @@
 #define BASE_PUPLE 			7
 #define BASE_WHITE 			9
 
-typedef struct
-{
+typedef struct{
     uint8_t G;
     uint8_t R;
     uint8_t B;
@@ -88,7 +87,7 @@ public:
 	void Update();
 	void Clear(); // Clear buffer (every bit = NPX_LOW) without update
 	void WriteLedColor(uint8_t ledNumber, uint32_t gbrColor);
-	inline uint8_t IrqHandler() {
+	inline uint8_t IrqHandler(){
 		if(DMA1->ISR & DMA_ISR_TCIF1 << 4*(Dma->Number - 1)){
 			DMA1->IFCR = DMA_IFCR_CTCIF1 << 4*(Dma->Number - 1);
 			Dma->Channel->CCR &= ~DMA_CCR_EN;
